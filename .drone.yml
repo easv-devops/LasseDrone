@@ -3,6 +3,18 @@ type: docker
 name: integration
 
 steps:
+- name: install
+    image: node:14
+    volumes:
+      - name: nodemod
+        path: /node_modules
+    pull: if-not-exists
+    commands:
+      - npm i
+      - ls
+    environment:
+      NODE_ENV: production
+      
   - name: code-analysis
     image: boulundeasv/dotnet-sdk-with-java
     commands: 
