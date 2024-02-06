@@ -3,14 +3,9 @@ type: docker
 name: integration
 
 steps:
-  - name: build
-    image: mcr.microsoft.com/dotnet/sdk:latest
+  - name: code-analysis
+    image: boulundeasv/dotnet-sdk-with-java
     commands: 
-      - apt-get update && apt-get install -y nodejs npm
+      - dotnet sonarscanner begin /k:"easv-devops_LasseDrone_AY19HJkpEVvRW2O60D3-" /d:sonar.host.url="http://sonar.setgo.dk:9000"  /d:sonar.token="sqp_64e459f022742d9ff0c4c7129892c337e90e0e76"
       - dotnet build
-
-  - name: test
-    image: mcr.microsoft.com/dotnet/sdk:7.0
-    commands: 
-      - cd tests/Blogifier.Tests
-      - dotnet test
+      - dotnet sonarscanner end /d:sonar.token="sqp_64e459f022742d9ff0c4c7129892c337e90e0e76"
