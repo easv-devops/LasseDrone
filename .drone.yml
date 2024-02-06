@@ -3,6 +3,10 @@ type: docker
 name: integration
 
 steps:
+    - name: build
+      image: mcr.microsoft.com/dotnet/sdk
+      commands:
+        - dotnet build
       
   - name: code-analysis
     image: boulundeasv/dotnet-sdk-with-java
